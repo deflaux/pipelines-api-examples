@@ -1,19 +1,10 @@
 #!/usr/bin/python
 
+# Copyright 2017 Google Inc.
 #
-# Copyright 2016 Google Inc. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#    http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file or at
+# https://developers.google.com/open-source/licenses/bsd
 
 """Python sample demonstrating use of the Google Genomics Pipelines API.
 
@@ -120,9 +111,10 @@ operation = service.pipelines().run(body={
       } ],
     },
 
-    # Specify the Docker image to use along with the command
+    # Specify the Docker image to use along with the command. Projects IDs with a
+    # colon (:) must swap it for a forward slash when specifying image names.
     'docker': {
-      'imageName': 'gcr.io/%s/fastqc' % args.project,
+      'imageName': 'gcr.io/%s/fastqc' % args.project.replace(':', '/'),
 
       # The Pipelines API will create the input directory when localizing files,
       # but does not create the output directory.
